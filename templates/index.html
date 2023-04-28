@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <title>My Notes App</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+</head>
+<body>
+  <div class="container mx-auto py-4">
+    <h1 class="text-2xl font-bold mb-4">My Notes</h1>
+
+    <form method="POST" action="/">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="title">Title</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" name="title" type="text" placeholder="Enter title">
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="content">Content</label>
+        <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="content" name="content" rows="10" placeholder="Enter content"></textarea>
+      </div>
+
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+        Add Note
+      </button>
+    </form>
+
+    {% for note in notes %}
+    <div class="border rounded p-4 mb-4">
+      <h2 class="text-lg font-bold">{{ note.title }}</h2>
+      <div class="text-content">{{ note.content }}</div>
+      <p class="text-sm text-gray-700">{{ note.created }}</p>
+      <form method="POST" action="/delete/{{ note.id }}">
+        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+          Delete
+        </button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
